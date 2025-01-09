@@ -1,0 +1,12 @@
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
+#include <vector>
+using namespace std;
+
+extern vector<string> deck;
+
+void initDeck();
+void shuffler();
+string getCard();
+int charToInt(string card);
