@@ -7,6 +7,6 @@ using namespace std;
 extern vector<string> deck;
 
 void initDeck();
-void shuffler();
+void shuffler(int &cardCount);
 string getCard();
 int charToInt(string card);
