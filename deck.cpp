@@ -124,19 +124,13 @@ string getCard()
     return card;
 }
 
-int charToInt(string card)
-{
+int charToInt(string card) {
     int cardInInt;
-    if (card.back() == 'J' || card.back() == 'Q' || card.back() == 'K' || card.back() == '0')
-    {
-        cardInInt = 10;
-    }
-
-    else if (card.back() == 'A')
-        cardInInt = 11;
-
-    else
-        cardInInt = card.back() - '0';
-
+    if (card.back() == 'J') cardInInt = 11;
+    else if (card.back() == 'Q') cardInInt = 12;
+    else if (card.back() == 'K') cardInInt = 13;
+    else if (card.back() == 'A') cardInInt = 14;
+    else if (card.back() == '0') cardInInt = 10; 
+    else cardInInt = card.back() - '0'; 
     return cardInInt;
 }
