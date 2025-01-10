@@ -51,5 +51,6 @@ int hand_score(string all[]){
         score =  charToInt(high_card(all));
         
     }
+    return score;
 }
 
