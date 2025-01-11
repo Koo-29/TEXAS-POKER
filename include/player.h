@@ -2,13 +2,12 @@
 using namespace std;
 
 class player
-{
-private:
+{public:
     string name;
     string hand[2];
     int pot;
-    bool folded;
-public:
+    bool folded = false;
+
     // constructor
     player(string inputName, int inputPot);
     // setter
