@@ -7,7 +7,7 @@ private:
     string name;
     string hand[2];
     int pot;
-
+    bool folded;
 public:
     // constructor
     player(string inputName, int inputPot);

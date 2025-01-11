@@ -5,6 +5,7 @@ player::player(string inputName, int inputPot)
 {
     name = inputName;
     pot = inputPot;
+    folded = false;
 }
 
 // setter
