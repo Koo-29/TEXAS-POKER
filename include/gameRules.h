@@ -2,9 +2,9 @@
 #include "player.h"
 using namespace std;
 
-int pool_chip = 1000;
+int pool_pot = 0;
 
 
 void allCards(string [], string [], string[]);//combine hand card and community card
 int hand_score(const string []);
-void check_winner(int, int);
+void check_winner(vector<player>&,string[]);
