@@ -7,7 +7,7 @@
 #include <algorithm>
 #include "deck.h"
 using namespace std;
-int const NUM_CARDS = 7;
+extern int const NUM_CARDS;
 
 string high_card(const string[]);
 bool a_pair(const string[]);

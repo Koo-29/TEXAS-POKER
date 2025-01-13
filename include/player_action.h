@@ -6,8 +6,8 @@
 #include <iostream>
 using namespace std;
 
-bool err = false;
-bool checkRaise = false;
+extern bool err;
+extern bool checkRaise;
 
 void fold(player &);
 void check(player &);

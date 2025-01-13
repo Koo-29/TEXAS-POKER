@@ -10,7 +10,7 @@ using namespace std;
 extern vector<string> deck;
 
 void initDeck();
-void shuffler(int &cardCount);
+void shuffler();
 string getCard();
 int charToInt(string card);
 
