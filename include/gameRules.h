@@ -7,7 +7,7 @@ using namespace std;
 
 extern int pool_pot;
 
-void allCards(string[], string[], string[]); // combine hand card and community card
+void allCards(const string[], const string[], string[]); // combine hand card and community card
 int hand_score(const string[]);
 void check_winner(vector<player> &, string[]);
 
