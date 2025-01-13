@@ -1,6 +1,9 @@
 #include "include/player_action.h"
 #include "include/gameRules.h"
 
+bool err = false;
+bool checkRaise = false;
+
 void fold(player &currentPlayer)
 {
     currentPlayer.folded = true;
