@@ -1,11 +1,16 @@
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #include <iostream>
 using namespace std;
 
 class player
-{public:
+{
+public:
     string name;
     string hand[2];
     int pot;
+    int currentBet;
     bool folded = false;
 
     // constructor
@@ -18,3 +23,5 @@ class player
     string get_hand(int card);
     int get_pot();
 };
+
+#endif
