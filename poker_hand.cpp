@@ -2,7 +2,7 @@
 
 
 
-string high_card(string card[]){
+string high_card(const string card[]){
   // change the type of card array to integer for comparision
    int value[NUM_CARDS];
    for (int i = 0; i < NUM_CARDS; i ++ ){
@@ -18,7 +18,7 @@ string high_card(string card[]){
    return card[highest];
 }
 
-bool a_pair(string card[]){
+bool a_pair(const string card[]){
    // change the type of card array to integer for comparision
     int value[NUM_CARDS];
     for (int i = 0; i < NUM_CARDS; i++) {
@@ -35,7 +35,7 @@ bool a_pair(string card[]){
 }
 
 
-bool two_pair(string card[]){
+bool two_pair(const string card[]){
   // change the type of card array to integer for comparision
    int value[NUM_CARDS];
   
@@ -57,7 +57,7 @@ bool two_pair(string card[]){
     return false;
 } 
 
-bool threekind(string card[]){
+bool threekind(const string card[]){
 // change the type of card array to integer for comparision
    int value[NUM_CARDS];
   
@@ -78,7 +78,7 @@ bool threekind(string card[]){
      return false;
 }
 
-bool fourkind(string card[]){
+bool fourkind(const string card[]){
 // change the type of card array to integer for comparision
    int value[NUM_CARDS];
   
@@ -101,7 +101,7 @@ bool fourkind(string card[]){
 }
 
 
-bool fullhouse(string card[]){
+bool fullhouse(const string card[]){
     // change the type of card array to integer for comparision
    int value[NUM_CARDS];
    for (int i = 0; i < NUM_CARDS; i ++ ){
@@ -136,7 +136,7 @@ bool fullhouse(string card[]){
     }
     return false;
 }
-bool straight(string card[]) {
+bool straight(const string card[]) {
     int value[NUM_CARDS];
     for (int i = 0; i < NUM_CARDS; i++) {
         value[i] = charToInt(card[i]);
@@ -156,7 +156,7 @@ bool straight(string card[]) {
     return false;
 }
 
-bool flush(string card[]) {
+bool flush(const string card[]) {
     string suit = card[0].substr(0, 3);
     for (int i = 1; i < NUM_CARDS; i++) {
         if (card[i].substr(0, 3) != suit)
@@ -168,14 +168,14 @@ bool flush(string card[]) {
 
 
 
-bool straightFlush(string card[]) {
+bool straightFlush(const string card[]) {
     return straight(card) && flush(card);
 }
     
 
 
  
-bool royalFlush(string card[]){
+bool royalFlush(const string card[]){
     map < string,vector<int>> suits;
 
     for (int i = 0; i < NUM_CARDS ; i++){
