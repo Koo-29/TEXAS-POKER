@@ -17,5 +17,29 @@ int initialScreen()
 
 int main()
 {
-    int option = initialScreen();
+    int option;
+    do
+    {
+        option = initialScreen();
+        switch (option)
+        {
+        case 1:
+
+            break;
+
+        case 2:
+            cout << "Texas Poker Rules:\n";
+            cout << "1. Players are dealt two private cards.\n";
+            cout << "2. Community cards are revealed over three rounds: the flop, the turn, and the river.\n";
+            cout << "3. Players can bet, check, raise, or fold during each round.\n";
+            cout << "4. The best 5-card hand wins.\n";
+            break;
+        case 3:
+            cout << "Exiting game... Goodbye!\n";
+            break;
+
+        default:
+            break;
+        }
+    } while (option != 3);
 }
