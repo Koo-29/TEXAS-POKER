@@ -1,11 +1,11 @@
 #include "include/player.h"
 
 // constructor
-player::player(string inputName, int inputPot)
+player::player(string inputName, int inputPot, PlayerType inputType)
 {
     name = inputName;
     pot = inputPot;
-    
+    type = inputType;
 }
 
 // setter

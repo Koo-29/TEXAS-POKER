@@ -4,6 +4,12 @@
 #include <iostream>
 using namespace std;
 
+enum PlayerType
+{
+    HUMAN,
+    BOT
+};
+
 class player
 {
 public:
@@ -12,9 +18,10 @@ public:
     int pot;
     int currentBet;
     bool folded = false;
+    PlayerType type;
 
     // constructor
-    player(string inputName, int inputPot);
+    player(string inputName, int inputPot, PlayerType type);
     // setter
     void set_hand(string getHand[]);
 
