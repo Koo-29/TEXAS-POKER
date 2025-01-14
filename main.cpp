@@ -1,6 +1,7 @@
 #include "include/player_action.h"
 #include "include/poker_hand.h"
 #include <iomanip>
+#include <fstream>
 
 int initialScreen()
 {
@@ -15,16 +16,41 @@ int initialScreen()
     return option;
 }
 
+void playerInfo(vector<player> &players)
+{
+    string inputName;
+    int pot;
+    ifstream getInfo("playerInfo.txt");
+    getInfo >> inputName;
+    getInfo >> pot;
+    if (inputName == "")
+    {
+        ofstream writeInfo("playerInfo.txt");
+        cout << "Since you are a new player, please fill in your name: ";
+        cin >> inputName;
+        pot = 1000;
+        writeInfo << inputName << endl;
+        writeInfo << 1000 << endl;
+    }
+    players = {
+        player(inputName, pot, HUMAN),
+        player("Bot1", 1000, BOT),
+        player("Bot2", 1000, BOT),
+        player("Bot3", 1000, BOT),
+    };
+}
+
 int main()
 {
     int option;
+    vector<player> players;
     do
     {
         option = initialScreen();
         switch (option)
         {
         case 1:
-
+            playerInfo(players);
             break;
 
         case 2:
