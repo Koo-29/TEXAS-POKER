@@ -12,5 +12,6 @@ extern bool checkRaise;
 void fold(player &);
 void check(player &);
 void raise(player &, int, int &, int &, vector<player>);
+void call(player &, int &, int &);
 
 #endif

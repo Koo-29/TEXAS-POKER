@@ -15,8 +15,8 @@ class player
 public:
     string name;
     string hand[2];
-    int pot;
-    int currentBet;
+    int pot = 0;
+    int currentBet = 0;
     bool folded = false;
     PlayerType type;
 

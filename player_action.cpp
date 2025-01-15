@@ -8,19 +8,19 @@ void fold(player &currentPlayer)
 {
     currentPlayer.folded = true;
     err = false;
-    cout << currentPlayer.name << " has folded.\n";
+    cout << currentPlayer.name << " has folded.\n\n";
 }
 
 void check(player &currentPlayer)
 {
     if (checkRaise)
     {
-        cout << "You cannot check, you can only call, raise or fold.\n";
+        cout << "You cannot check, you can only call, raise or fold.\n\n";
         err = true;
     }
     else
     {
-        cout << currentPlayer.name << " has checked.\n";
+        cout << currentPlayer.name << " has checked.\n\n";
         err = false;
     }
 }
@@ -38,17 +38,17 @@ void raise(player &currentPlayer, int raiseAmount, int &currentBet, int &current
         checkRaise = true;
         err = false;
 
-        cout << currentPlayer.name << " raised to " << currentBet << ".\n";
+        cout << currentPlayer.name << " raised to " << currentBet << ".\n\n";
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
     }
     else
     {
         err = true;
-        cout << currentPlayer.name << "does not have enough chips to raise.\n";
+        cout << currentPlayer.name << "does not have enough chips to raise.\n\n";
     }
 }
 
-void call(player &currentPlayer, int betAmount, int &currentBet, int &currentPlayerIndex)
+void call(player &currentPlayer, int &currentBet, int &currentPlayerIndex)
 {
     int requireAmount = currentBet - currentPlayer.currentBet;
     if (currentPlayer.pot >= requireAmount)
@@ -59,7 +59,7 @@ void call(player &currentPlayer, int betAmount, int &currentBet, int &currentPla
         checkRaise = true;
         err = false;
 
-        cout << currentPlayer.name << " calls " << currentBet << ".\n";
+        cout << currentPlayer.name << " calls " << currentBet << ".\n\n";
     }
     else
     {
@@ -67,6 +67,6 @@ void call(player &currentPlayer, int betAmount, int &currentBet, int &currentPla
         currentPlayer.currentBet += currentPlayer.pot;
         currentPlayer.pot = 0;
 
-        cout << currentPlayer.name << " goes all-in!\n";
+        cout << currentPlayer.name << " goes all-in!\n\n";
     }
 }

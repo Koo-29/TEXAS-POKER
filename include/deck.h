@@ -8,10 +8,11 @@
 using namespace std;
 
 extern vector<string> deck;
+extern int cardCount;
 
 void initDeck();
 void shuffler();
-string getCard();
+string getCard(int &);
 int charToInt(string card);
 
 #endif
