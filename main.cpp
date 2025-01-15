@@ -2,6 +2,7 @@
 #include "include/poker_hand.h"
 #include <iomanip>
 #include <fstream>
+#include <windows.h>
 
 int initialScreen()
 {
@@ -39,18 +40,114 @@ void playerInfo(vector<player> &players)
         player("Bot3", 1000, BOT),
     };
 }
+void bettingRound(vector<player> &players, int &currentBet, int &pot)
+{
+    int activePlayers = players.size(), playerCount = 0;
+    int currentPlayerIndex = 0;
+    bool bettingRoundActive = true;
+
+    while (bettingRoundActive)
+    {
+        player &currentPlayer = players[currentPlayerIndex];
+
+        Sleep(1000);
+        if (!currentPlayer.folded)
+        {
+            cout << currentPlayer.name << "'s turn. Current bet: " << currentBet << ". Chips: " << currentPlayer.pot << "\n";
+            cout << "Choose action: 1) Check  2) Call  3) Raise  4) Fold\n";
+
+            int action;
+            cin >> action;
+
+            switch (action)
+            {
+            case 1:
+                check(currentPlayer);
+                break;
+
+            case 2:
+                call(currentPlayer, currentBet, currentPlayerIndex);
+                break;
+
+            case 3:
+            {
+                playerCount = 1;
+                cout << "Enter raise amount: ";
+                int raiseAmount;
+                cin >> raiseAmount;
+                raise(currentPlayer, raiseAmount, currentBet, currentPlayerIndex, players);
+                continue;
+            }
+
+            case 4:
+                fold(currentPlayer);
+                activePlayers--;
+                break;
+
+            default:
+                cout << "Invalid action. Try again.\n";
+                continue;
+            }
+        }
+
+        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+        playerCount++;
+
+        if (playerCount >= players.size())
+        {
+            bettingRoundActive = false;
+            checkRaise = false;
+        }
+
+        if (activePlayers <= 1)
+        {
+            bettingRoundActive = false;
+            checkRaise = false;
+        }
+    }
+
+    cout << "Betting round ended. Pot: " << pot << "\n";
+}
+
+void preFlop(vector<player> &players, int &currentBet)
+{
+    initDeck();
+    shuffler();
+    cout << "Dealing cards to players...";
+    for (int i = 0; i < players.size(); i++)
+    {
+        for (int j = 0; j < 2; j++)
+        {
+            players[i].hand[j] = getCard(cardCount);
+        }
+
+        players[i].currentBet += 10;
+        players[i].pot -= 10;
+        pool_pot += players[i].currentBet;
+    }
+    Sleep(1000);
+    cout << "\n\n";
+
+    currentBet += 10;
+
+    cout << "Minimum bet is 10, you can check or raise.\n";
+    bettingRound(players, currentBet, pool_pot);
+}
 
 int main()
 {
-    int option;
+    int option, currentBet;
     vector<player> players;
     do
     {
+        pool_pot = 0;
+        currentBet = 0;
         option = initialScreen();
         switch (option)
         {
         case 1:
             playerInfo(players);
+            preFlop(players, currentBet);
             break;
 
         case 2:
