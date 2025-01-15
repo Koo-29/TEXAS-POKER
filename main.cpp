@@ -1,5 +1,6 @@
 #include "include/player_action.h"
 #include "include/poker_hand.h"
+#include "include/bot_behavior.h"
 #include <iomanip>
 #include <fstream>
 #include <windows.h>
@@ -51,43 +52,51 @@ void bettingRound(vector<player> &players, int &currentBet, int &pot)
         player &currentPlayer = players[currentPlayerIndex];
 
         Sleep(1000);
-        if (!currentPlayer.folded)
+        if (currentPlayer.type == HUMAN)
         {
-            cout << currentPlayer.name << "'s turn. Current bet: " << currentBet << ". Chips: " << currentPlayer.pot << "\n";
-            cout << "Choose action: 1) Check  2) Call  3) Raise  4) Fold\n";
-
-            int action;
-            cin >> action;
-
-            switch (action)
+            if (!currentPlayer.folded)
             {
-            case 1:
-                check(currentPlayer);
-                break;
+                cout << currentPlayer.name << "'s turn. Current bet: " << currentBet << ". Chips: " << currentPlayer.pot << "\n";
+                cout << "Your hand: " << currentPlayer.hand[0] << " " << currentPlayer.hand[1] << endl;
+                cout << "Choose action: 1) Check  2) Call  3) Raise  4) Fold\n";
 
-            case 2:
-                call(currentPlayer, currentBet, currentPlayerIndex);
-                break;
+                int action;
+                cin >> action;
 
-            case 3:
-            {
-                playerCount = 1;
-                cout << "Enter raise amount: ";
-                int raiseAmount;
-                cin >> raiseAmount;
-                raise(currentPlayer, raiseAmount, currentBet, currentPlayerIndex, players);
-                continue;
+                switch (action)
+                {
+                case 1:
+                    check(currentPlayer);
+                    break;
+
+                case 2:
+                    call(currentPlayer, currentBet, currentPlayerIndex);
+                    break;
+
+                case 3:
+                {
+                    playerCount = 1;
+                    cout << "Enter raise amount: ";
+                    int raiseAmount;
+                    cin >> raiseAmount;
+                    raise(currentPlayer, raiseAmount, currentBet, currentPlayerIndex, players);
+                    continue;
+                }
+
+                case 4:
+                    fold(currentPlayer);
+                    activePlayers--;
+                    break;
+
+                default:
+                    cout << "Invalid action. Try again.\n";
+                    continue;
+                }
             }
-
-            case 4:
-                fold(currentPlayer);
-                activePlayers--;
-                break;
-
-            default:
-                cout << "Invalid action. Try again.\n";
-                continue;
-            }
+        }
+        else
+        {
+            decideAction(currentPlayer, currentBet, currentPlayer.hand, currentPlayerIndex, players, playerCount);
         }
 
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
