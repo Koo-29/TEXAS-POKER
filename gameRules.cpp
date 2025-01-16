@@ -2,24 +2,42 @@
 using namespace std;
 
 int pool_pot = 0;
-
+int repetitonCardValue(const string card[]){
+    int value[NUM_CARDS];
+    int repValue;
+    for (int i = 0; i < NUM_CARDS; i++)
+    {
+        value[i] = charToInt(card[i]);
+    }
+    for (int i = 0; i < NUM_CARDS - 1; i++)
+    {
+        for (int j = (i + 1); j < NUM_CARDS; j++)
+        {
+            if (value[i] == value[j])
+            {
+                repValue = value[i];
+            }
+        }
+    }
+    return repValue;
+}
 void allCards(const string hand[], const string board[], string all[])
 {
-    int i = 0;
+    int k = 0;
     for (int i = 0; i < 2; i++)
     {
-        all[i++] = hand[i];
+        all[k++] = hand[i];
     }
 
     for (int j = 0; j < 5; j++)
     {
-        all[i++] = board[j];
+        all[k++] = board[j];
     }
 }
 
 int hand_score(string all[])
 {
-    ;
+    
     int score = 0;
 
     if (royalFlush(all))
@@ -60,7 +78,7 @@ int hand_score(string all[])
     }
     else if (a_pair(all))
     {
-        score = 40 + charToInt(high_card(all));
+        score = 40 + repetitonCardValue(all);
     }
     else
     {
@@ -95,9 +113,10 @@ void check_winner(vector<player> &players, string board[])
         {
             highest_score = score;
             winner = i;
-            players[i].pot += pool_pot;
+            
         }
     }
+    players[winner].pot += pool_pot;
 
     if (winner != -1)
     {
