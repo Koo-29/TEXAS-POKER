@@ -25,8 +25,8 @@ void playerInfo(vector<player> &players)
     string inputName;
     int pot;
     ifstream getInfo("playerInfo.txt");
-    getInfo >> inputName;
-    getInfo >> pot;
+    getInfo >> inputName >> pot;
+    getInfo.close();
     if (inputName == "")
     {
         ofstream writeInfo("playerInfo.txt");
@@ -35,13 +35,16 @@ void playerInfo(vector<player> &players)
         pot = 1000;
         writeInfo << inputName << endl;
         writeInfo << 1000 << endl;
+        writeInfo.close();
     }
-    players = {
-        player(inputName, pot, HUMAN),
-        player("Bot1", 1000, BOT),
-        player("Bot2", 1000, BOT),
-        player("Bot3", 1000, BOT),
-    };
+    players.push_back(player(inputName, pot, HUMAN));
+
+    ifstream getBotInfo("botInfo.txt");
+    while (!getBotInfo.eof())
+    {
+        getBotInfo >> inputName >> pot;
+        players.push_back(player(inputName, pot, BOT));
+    }
 }
 void bettingRound(vector<player> &players, int &currentBet, int &pot)
 {
