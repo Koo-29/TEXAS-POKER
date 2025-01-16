@@ -9,6 +9,7 @@ int repetitonCardValue(const string card[]){
     {
         value[i] = charToInt(card[i]);
     }
+    sort(value, value + NUM_CARDS);
     for (int i = 0; i < NUM_CARDS - 1; i++)
     {
         for (int j = (i + 1); j < NUM_CARDS; j++)
@@ -46,7 +47,7 @@ int hand_score(string all[])
     }
     else if (straightFlush(all))
     {
-        score = 180 + charToInt(all[4]);
+        score = 180 + repetitonCardValue(all);
     }
 
     else if (flush(all))
@@ -61,20 +62,20 @@ int hand_score(string all[])
     else if (fourkind(all))
     {
 
-        score = 120 + charToInt(high_card(all));
+        score = 120 + repetitonCardValue(all);
     }
     else if (fullhouse(all))
     {
-        score = 100 + charToInt(high_card(all));
+        score = 100 + repetitonCardValue(all);
     }
 
     else if (threekind(all))
     {
-        score = 80 + charToInt(high_card(all));
+        score = 80 + repetitonCardValue(all);
     }
     else if (two_pair(all))
     {
-        score = 60 + charToInt(high_card(all));
+        score = 60 + repetitonCardValue(all);
     }
     else if (a_pair(all))
     {

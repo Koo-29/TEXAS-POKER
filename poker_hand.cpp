@@ -179,14 +179,17 @@ bool straight(const string card[])
     if (value[0] == 2 && value[1] == 3 && value[2] == 4 && value[3] == 5 && value[4] == 14)
         return true;
     int consequtive = 0;
-    for (int i = 1; i < NUM_CARDS; i++)
+     for (int i = 1; i < NUM_CARDS; i++)
     {
-        if (value[i] == value[i - 1] + 1)
+        if (value[i] == value[i - 1] + 1){
             consequtive += 1;
-    }
-    if (consequtive >= 5)
-    {
-        return true;
+             if (consequtive >= 5){
+                 return true;
+            }
+            }
+        else {
+            consequtive = 1;
+        }
     }
     return false;
 }
