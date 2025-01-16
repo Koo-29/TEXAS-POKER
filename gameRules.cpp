@@ -71,6 +71,14 @@ int hand_score(string all[])
 
 void check_winner(vector<player> &players, string board[])
 {
+    // all active player show hands
+    cout << "Community Cards: " << board[0] << " " << board[1] << " " << board[2] << " " << board[3] << " " << board[4] << endl;
+    for (int i = 0; i < players.size(); i++)
+    {
+        if (players[i].folded)
+            continue;
+        cout << players[i].name << "'s hand: " << players[i].hand[0] << " " << players[i].hand[1] << endl;
+    }
     int winner = -1;
     int highest_score = 0;
     int playerNO = players.size();
@@ -93,7 +101,7 @@ void check_winner(vector<player> &players, string board[])
 
     if (winner != -1)
     {
-        cout << "The winner is player " << winner << " with a pot of " << players[winner].pot << endl;
+        cout << "The winner is " << players[winner].name << " with a pot of " << players[winner].pot << endl;
     }
     else
     {

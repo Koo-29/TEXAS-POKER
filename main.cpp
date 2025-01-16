@@ -194,6 +194,7 @@ int main()
             flop(players, currentBet);
             turn(players, currentBet);
             river(players, currentBet);
+            check_winner(players, board);
             break;
 
         case 2:
