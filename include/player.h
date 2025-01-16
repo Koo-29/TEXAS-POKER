@@ -19,6 +19,7 @@ public:
     int currentBet = 0;
     bool folded = false;
     PlayerType type;
+    string highestRank = "";
 
     // constructor
     player(string inputName, int inputPot, PlayerType type);
