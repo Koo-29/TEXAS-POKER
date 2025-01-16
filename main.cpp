@@ -157,6 +157,26 @@ void flop(vector<player> &players, int &currentBet)
     bettingRound(players, currentBet, pool_pot);
 }
 
+void turn(vector<player> &players, int &currentBet)
+{
+    cout << "Dealing 1 community cards...";
+    Sleep(1000);
+    cout << "\n\n";
+    board[3] = getCard(cardCount);
+    cout << "The board: " << board[0] << " " << board[1] << " " << board[2] << " " << board[3] << endl;
+    bettingRound(players, currentBet, pool_pot);
+}
+
+void river(vector<player> &players, int &currentBet)
+{
+    cout << "Dealing 1 community cards...";
+    Sleep(1000);
+    cout << "\n\n";
+    board[4] = getCard(cardCount);
+    cout << "The board: " << board[0] << " " << board[1] << " " << board[2] << " " << board[3] << " " << board[4] << endl;
+    bettingRound(players, currentBet, pool_pot);
+}
+
 int main()
 {
     int option, currentBet;
@@ -172,6 +192,8 @@ int main()
             playerInfo(players);
             preFlop(players, currentBet);
             flop(players, currentBet);
+            turn(players, currentBet);
+            river(players, currentBet);
             break;
 
         case 2:
