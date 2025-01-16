@@ -10,11 +10,13 @@ string board[5];
 int initialScreen()
 {
     int option;
-    cout << setfill('*') << setw(30) << "Welcome to texas poker" << setw(8) << "" << endl;
+    cout << setfill('=') << setw(38) << "" << endl;
+    cout << setfill(' ') << setw(30) << "Welcome to texas poker" << endl;
+    cout << setfill('=') << setw(38) << "" << endl;
     cout << setfill(' ') << "1. Start game" << endl;
     cout << "2. View rules" << endl;
     cout << "3. Exit" << endl;
-    cout << setfill('*') << setw(38) << "" << endl;
+    cout << setfill('-') << setw(38) << "" << endl;
     cout << setfill(' ') << "Please select an option (1-3): ";
     cin >> option;
     return option;
@@ -64,9 +66,13 @@ void bettingRound(vector<player> &players, int &currentBet, int &pot)
             {
                 do
                 {
-                    cout << currentPlayer.name << "'s turn. Current bet: " << currentBet << ". Chips: " << currentPlayer.pot << "\n";
+                    cout << currentPlayer.name << "'s turn:" << endl;
+                    cout << "Current Bet: " << currentBet << endl;
                     cout << "Your hand: " << currentPlayer.hand[0] << " " << currentPlayer.hand[1] << endl;
-                    cout << "Choose action: 1) Check  2) Call  3) Raise  4) Fold\n";
+                    cout << "Your pot: " << currentPlayer.pot << "\n\n";
+                    cout << "Choose action:\n";
+                    cout << "1. Check \n2. Call \n3. Raise \n4. Fold\n\n";
+                    cout << "Choose your action: ";
 
                     int action;
                     cin >> action;
@@ -131,6 +137,9 @@ void preFlop(vector<player> &players, int &currentBet)
 {
     initDeck();
     shuffler();
+    cout << setfill('=') << setw(38) << "" << endl;
+    cout << setfill(' ') << setw(22) << "Pre Flop" << endl;
+    cout << setfill('=') << setw(38) << "" << endl;
     cout << "Dealing cards to players...";
     for (int i = 0; i < players.size(); i++)
     {
@@ -144,16 +153,19 @@ void preFlop(vector<player> &players, int &currentBet)
         pool_pot += players[i].currentBet;
     }
     Sleep(1000);
-    cout << "\n\n";
+    cout << "\n";
 
     currentBet += 10;
 
-    cout << "Minimum bet is 10, you can check or raise.\n";
+    cout << "Minimum bet is 10, you can check or raise.\n\n";
     bettingRound(players, currentBet, pool_pot);
 }
 
 void flop(vector<player> &players, int &currentBet)
 {
+    cout << setfill('=') << setw(38) << "" << endl;
+    cout << setfill(' ') << setw(22) << "The Flop" << endl;
+    cout << setfill('=') << setw(38) << "" << endl;
     cout << "Dealing 3 community cards...";
     Sleep(1000);
     cout << "\n\n";
@@ -166,6 +178,9 @@ void flop(vector<player> &players, int &currentBet)
 
 void turn(vector<player> &players, int &currentBet)
 {
+    cout << setfill('=') << setw(38) << "" << endl;
+    cout << setfill(' ') << setw(22) << "The Turn" << endl;
+    cout << setfill('=') << setw(38) << "" << endl;
     cout << "Dealing 1 community cards...";
     Sleep(1000);
     cout << "\n\n";
@@ -176,6 +191,9 @@ void turn(vector<player> &players, int &currentBet)
 
 void river(vector<player> &players, int &currentBet)
 {
+    cout << setfill('=') << setw(38) << "" << endl;
+    cout << setfill(' ') << setw(23) << "The river" << endl;
+    cout << setfill('=') << setw(38) << "" << endl;
     cout << "Dealing 1 community cards...";
     Sleep(1000);
     cout << "\n\n";
@@ -217,6 +235,9 @@ int main()
             flop(players, currentBet);
             turn(players, currentBet);
             river(players, currentBet);
+            cout << setfill('=') << setw(38) << "" << endl;
+            cout << setfill(' ') << setw(22) << "Showdown" << endl;
+            cout << setfill('=') << setw(38) << "" << endl;
             check_winner(players, board);
             updateInfo(players);
             break;
@@ -227,6 +248,7 @@ int main()
             cout << "2. Community cards are revealed over three rounds: the flop, the turn, and the river.\n";
             cout << "3. Players can bet, check, raise, or fold during each round.\n";
             cout << "4. The best 5-card hand wins.\n";
+            Sleep(2000);
             break;
         case 3:
             cout << "Exiting game... Goodbye!\n";

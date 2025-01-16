@@ -21,7 +21,6 @@ void decideAction(player &currentPlayer, int &currentBet, string hand[], int cur
 
     // Aggression influences decision-making
     float riskFactor = handStrength / 100.0f;
-    cout << riskFactor << endl;
     int actionDecision = rand() % 100;
 
     if (riskFactor > 0.7 && actionDecision > 30)
