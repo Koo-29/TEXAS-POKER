@@ -5,6 +5,8 @@
 #include <fstream>
 #include <windows.h>
 
+string board[5];
+
 int initialScreen()
 {
     int option;
@@ -143,6 +145,18 @@ void preFlop(vector<player> &players, int &currentBet)
     bettingRound(players, currentBet, pool_pot);
 }
 
+void flop(vector<player> &players, int &currentBet)
+{
+    cout << "Dealing 3 community cards...";
+    Sleep(1000);
+    cout << "\n\n";
+    board[0] = getCard(cardCount);
+    board[1] = getCard(cardCount);
+    board[2] = getCard(cardCount);
+    cout << "The board: " << board[0] << " " << board[1] << " " << board[2] << endl;
+    bettingRound(players, currentBet, pool_pot);
+}
+
 int main()
 {
     int option, currentBet;
@@ -157,6 +171,7 @@ int main()
         case 1:
             playerInfo(players);
             preFlop(players, currentBet);
+            flop(players, currentBet);
             break;
 
         case 2:
