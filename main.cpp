@@ -40,11 +40,12 @@ void playerInfo(vector<player> &players)
     players.push_back(player(inputName, pot, HUMAN));
 
     ifstream getBotInfo("botInfo.txt");
-    while (!getBotInfo.eof())
+    while (getBotInfo >> inputName >> pot)
     {
-        getBotInfo >> inputName >> pot;
-        players.push_back(player(inputName, pot, BOT));
+        if (!inputName.empty())
+            players.push_back(player(inputName, pot, BOT));
     }
+    getBotInfo.close();
 }
 void bettingRound(vector<player> &players, int &currentBet, int &pot)
 {
@@ -82,7 +83,7 @@ void bettingRound(vector<player> &players, int &currentBet, int &pot)
 
                     case 3:
                     {
-                        playerCount = 1;
+                        playerCount = 0;
                         cout << "Enter raise amount: ";
                         int raiseAmount;
                         cin >> raiseAmount;
@@ -183,6 +184,21 @@ void river(vector<player> &players, int &currentBet)
     bettingRound(players, currentBet, pool_pot);
 }
 
+void updateInfo(vector<player> &players)
+{
+    ofstream updatePlayer("playerInfo.txt", ios::trunc);
+    ofstream updateBot("botInfo.txt", ios::trunc);
+    for (int i = 0; i < players.size(); i++)
+    {
+        if (players[i].type == HUMAN)
+            updatePlayer << players[i].name << " " << players[i].pot << endl;
+        else
+            updateBot << players[i].name << " " << players[i].pot << endl;
+    }
+    updatePlayer.close();
+    updateBot.close();
+}
+
 int main()
 {
     int option, currentBet;
@@ -191,6 +207,7 @@ int main()
     {
         pool_pot = 0;
         currentBet = 0;
+        players.clear();
         option = initialScreen();
         switch (option)
         {
@@ -201,6 +218,7 @@ int main()
             turn(players, currentBet);
             river(players, currentBet);
             check_winner(players, board);
+            updateInfo(players);
             break;
 
         case 2:

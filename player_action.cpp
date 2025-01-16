@@ -39,7 +39,6 @@ void raise(player &currentPlayer, int raiseAmount, int &currentBet, int &current
         err = false;
 
         cout << currentPlayer.name << " raised to " << currentBet << ".\n\n";
-        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
     }
     else
     {

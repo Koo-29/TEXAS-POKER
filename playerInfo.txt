@@ -1,2 +1,1 @@
-Alfred
-1000
+Alfred 1782
