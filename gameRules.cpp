@@ -2,7 +2,8 @@
 using namespace std;
 
 int pool_pot = 0;
-int repetitonCardValue(const string card[]){
+int repetitonCardValue(const string card[])
+{
     int value[NUM_CARDS];
     int repValue;
     for (int i = 0; i < NUM_CARDS; i++)
@@ -36,53 +37,67 @@ void allCards(const string hand[], const string board[], string all[])
     }
 }
 
-int hand_score(string all[])
+int hand_score(string &highestRank, string all[])
 {
-    
+
     int score = 0;
 
     if (royalFlush(all))
     {
+        highestRank = "Royal Flush";
         score = 200;
     }
     else if (straightFlush(all))
     {
         score = 180 + repetitonCardValue(all);
+        highestRank = "Straight Flush";
+        
     }
 
     else if (flush(all))
     {
-
+        highestRank = "Flush";
         score = 160 + charToInt(high_card(all));
     }
     else if (straight(all))
     {
+        highestRank = "Straight";
         score = 140 + charToInt(all[4]);
     }
     else if (fourkind(all))
     {
 
         score = 120 + repetitonCardValue(all);
+        highestRank = "Four of the kind";
+      
     }
     else if (fullhouse(all))
     {
         score = 100 + repetitonCardValue(all);
+        highestRank = "Full House";
+      
     }
 
     else if (threekind(all))
     {
         score = 80 + repetitonCardValue(all);
+        highestRank = "Three of the kind";
+        
     }
     else if (two_pair(all))
     {
         score = 60 + repetitonCardValue(all);
+        highestRank = "Two pair";
+        
     }
     else if (a_pair(all))
     {
+        highestRank = "Pair";
         score = 40 + repetitonCardValue(all);
     }
     else
     {
+        highestRank = "High card";
         score = charToInt(high_card(all));
     }
     return score;
@@ -109,13 +124,18 @@ void check_winner(vector<player> &players, string board[])
         }
         string all[7];
         allCards(players[i].hand, board, all);
-        int score = hand_score(all);
+        int score = hand_score(players[i].highestRank, all);
         if (score > highest_score)
         {
             highest_score = score;
             winner = i;
-            
         }
+    }
+    for (int i = 0; i < players.size(); i++)
+    {
+        if (players[i].folded)
+            continue;
+        cout << players[i].name << "'s hand: " << players[i].hand[0] << " " << players[i].hand[1] << " -> " << players[i].highestRank << endl;
     }
     players[winner].pot += pool_pot;
 
